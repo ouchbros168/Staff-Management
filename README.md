@@ -8,6 +8,7 @@ This project aims to provide a comprehensive solution for managing staff informa
 - **Update:** Enables users to modify existing staff information.
 - **Delete:** Allows users to remove staff members from the database.
 - **Search Advanced:** Provides advanced search functionality with filters based on staff ID, gender, and birthday within a specified date range.
+- **Export Data:** We enable with Excel and PDF base on search
 
 ## Technologies Used
 
