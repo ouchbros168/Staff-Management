@@ -76,10 +76,15 @@ namespace StaffManagementApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStaff(int id, Staff staff)
         {
-           
             if (id != staff.Id)
             {
                 return BadRequest(new { data = staff, message = "Invalid staff ID." });
+            }
+
+            // Check if the staffId already exists in the database
+            if (_context.Staffs.Any(s => s.StaffId == staff.StaffId && s.Id != id))
+            {
+                return Conflict(new { data = staff, message = "StaffId already exists." });
             }
 
             _context.Entry(staff).State = EntityState.Modified;
@@ -100,7 +105,6 @@ namespace StaffManagementApi.Controllers
                     throw;
                 }
             }
-            
         }
 
         // POST: api/Staff
@@ -111,11 +115,20 @@ namespace StaffManagementApi.Controllers
             {
                 return BadRequest(new { data = staff, message = "Invalid staff data." });
             }
+
+            // Check if the staffId already exists in the database
+            if (_context.Staffs.Any(s => s.StaffId == staff.StaffId))
+            {
+                // Return a conflict response (409) indicating duplicate staffId
+                return Conflict(new { data = staff, message = "StaffId already exists." });
+            }
+
             _context.Staffs.Add(staff);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetStaff), new { id = staff.Id }, new { data = staff, message = "Staff created successfully." });
         }
+
 
         // DELETE: api/Staff/5
         [HttpDelete("{id}")]

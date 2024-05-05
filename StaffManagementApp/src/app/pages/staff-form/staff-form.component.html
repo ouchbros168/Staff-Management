@@ -2,9 +2,15 @@
 <form [formGroup]="staffForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
   <div class="mb-5">
     <label for="staffId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Staff ID</label>
-    <input type="text" id="staffId" class="form-control" placeholder="Staff ID" formControlName="staffId">
+    <input type="text" id="staffId" class="form-control" placeholder="Staff ID" formControlName="staffId" minlength="8" maxlength="8">
     @if (staffForm.get('staffId')?.hasError('required') && staffForm.get('staffId')?.touched) {
-    <div class="form-error">Staff ID is required</div>
+        <div class="form-error">Staff ID is required</div>
+    }
+    @if (staffForm.get('staffId')?.hasError('minlength')) {
+        <div class="form-error">Staff ID must be at least 8 characters long</div>
+    }
+    @if (staffForm.get('staffId')?.hasError('maxlength')) {
+        <div class="form-error">Staff ID cannot exceed 8 characters</div>
     }
   </div>
   <div class="mb-5">
