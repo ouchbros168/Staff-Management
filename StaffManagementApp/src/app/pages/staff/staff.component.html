@@ -1,0 +1,107 @@
+<div class="items-center mb-6">
+    <h4 class="font-bold text-2xl"></h4>
+    <button type="button" (click)="openModel()"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium  px-6 py-3 text-center mb-2 " style="float: right">Add
+      Staff</button>
+      <button type="button" (click)="exportToExcel()"
+      class="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium  px-6 py-3 text-center mb-2">Export
+      to Excel</button>
+      <button type="button" (click)="exportToPDF()"
+        class="text-white bg-red-700 hover:bg-red-800 focus:outline-none font-medium  px-6 py-3 text-center mb-2">
+        Export to PDF
+    </button>
+    <button type="button" (click)="openSearchModel()"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium  px-6 py-3 text-center mb-2">
+        Filter
+    </button>
+
+  </div>
+ 
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <caption
+        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+        Manage Staffs
+      </caption>
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Staff ID
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Fullname
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Birthday
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Gender
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <span class="sr-only">Edit</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of staffs; track $index) {
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{item.staffId}}
+          </th>
+          <td class="px-6 py-4">
+            {{item.fullName}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.birthDay}}
+          </td>
+          <td class="px-6 py-4">
+            {{ item.gender == 1 ? 'Male' : 'Female' }}
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button type="button" (click)="item.id && loadStaff(item)"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4">Edit</button>
+            <button type="button" (click)="item.id && deleteStaff(item.id)"
+              class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  
+  <app-model [isOpen]="isModelOpen" (closeModel)="closeModel()">
+    <app-staff-form (onCloseModel)="closeModel()" [data]="staff"></app-staff-form>
+  </app-model>
+
+  
+  <app-model [isOpen]="isSearchModelOpen" (closeModel)="closeSearchModel()">
+    <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">Staff Filter</h5>
+    <form [formGroup]="searchForm" class="w-full" (ngSubmit)="onSearch()" novalidate>
+    <div class="mb-5">
+        <label for="staffId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Staff ID</label>
+        <input type="text" id="staffId" class="form-control" placeholder="Staff ID" formControlName="staffId">
+    </div>
+    <div class="mb-5">
+        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+        <select id="gender" class="form-control" formControlName="gender">
+        <option value="">Select Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        </select>
+    </div>
+    <div class="mb-5">
+        <label for="fromDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DOB (From Date)</label>
+        <input type="date" id="fromDate" class="form-control" placeholder="" formControlName="fromDate">
+    </div>
+    <div class="mb-5">
+        <label for="toDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DOB (To Date)</label>
+        <input type="date" id="toDate" class="form-control" placeholder="" formControlName="toDate">
+    </div>
+    <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Search</button>
+    <button type="button" (click)="onSearchClose()"
+        class="text-white  ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Cancel</button>
+    </form>
+  </app-model>
+  

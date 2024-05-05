@@ -1,0 +1,27 @@
+<h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">Staff Filter</h5>
+<form [formGroup]="searchForm" class="w-full" (ngSubmit)="onSearch()" novalidate>
+  <div class="mb-5">
+    <label for="staffId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Staff ID</label>
+    <input type="text" id="staffId" class="form-control" placeholder="Staff ID" formControlName="staffId">
+  </div>
+  <div class="mb-5">
+    <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+    <select id="gender" class="form-control" formControlName="gender">
+      <option value="">Select Gender</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+  </div>
+  <div class="mb-5">
+    <label for="fromDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DOB (From Date)</label>
+    <input type="date" id="fromDate" class="form-control" placeholder="" formControlName="fromDate">
+  </div>
+  <div class="mb-5">
+    <label for="toDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DOB (To Date)</label>
+    <input type="date" id="toDate" class="form-control" placeholder="" formControlName="toDate">
+  </div>
+  <button type="submit"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Search</button>
+  <button type="button" (click)="onSearchClose()"
+    class="text-white  ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Cancel</button>
+</form>

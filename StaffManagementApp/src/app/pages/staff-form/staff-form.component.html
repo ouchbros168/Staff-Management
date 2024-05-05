@@ -1,0 +1,40 @@
+<h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">Staff Details</h5>
+<form [formGroup]="staffForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
+  <div class="mb-5">
+    <label for="staffId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Staff ID</label>
+    <input type="text" id="staffId" class="form-control" placeholder="Staff ID" formControlName="staffId">
+    @if (staffForm.get('staffId')?.hasError('required') && staffForm.get('staffId')?.touched) {
+    <div class="form-error">Staff ID is required</div>
+    }
+  </div>
+  <div class="mb-5">
+    <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fullname</label>
+    <input type="text" id="fullName" class="form-control" placeholder="Fullname" formControlName="fullName">
+    @if (staffForm.get('fullName')?.hasError('required') && staffForm.get('fullName')?.touched) {
+    <div class="form-error">Fullname is required</div>
+    }
+  </div>
+  
+  <div class="mb-5">
+    <label for="birthDay" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of Birth</label>
+    <input type="date" id="birthDay" class="form-control" placeholder="" formControlName="birthDay">
+    @if (staffForm.get('birthDay')?.hasError('required') && staffForm.get('birthDay')?.touched) {
+    <div class="form-error">Date of Birth is required</div>
+    }
+  </div>
+  <div class="mb-5">
+    <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+    <select id="gender" class="form-control" formControlName="gender">
+      <option value="">Select Gender</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+    @if (staffForm.get('gender')?.hasError('required') && staffForm.get('gender')?.touched) {
+        <div class="form-error">Gender is required</div>
+    }
+  </div>
+  <button type="submit"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+  <button type="button" (click)="onClose()"
+    class="text-white  ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Cancel</button>
+</form>
