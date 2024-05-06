@@ -13,7 +13,7 @@ This project aims to provide a comprehensive solution for managing staff informa
 ## Technologies Used
 
 - **Backend:** ASP.NET Core 6.0
-- **Frontend:** Angular
+- **Frontend:** Angular 17.3.6
 - **Database:** Microsoft SQL Server
 
 ## Database Schema
@@ -45,8 +45,8 @@ The project utilizes a Microsoft SQL Server database with a single table named `
 To run the project:
 
 1. Set up the backend API using ASP.NET Core 6.0.
-2. Set up the frontend using Angular.
-3. Ensure that the Microsoft SQL Server database is configured correctly with the `Staff` table schema.
+2. Set up the frontend using Angular 17.3.6.
+3. Ensure that the Microsoft SQL Server database is configured correctly with the `staff` table schema.
 
 ## Contributors
 
